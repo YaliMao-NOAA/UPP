@@ -46,22 +46,23 @@ module use ${moduledir}
 module load post/v8.0.0-${machine}
 module list
 
+homedir=`dirname $(readlink -f .)`
 cd ncep_post.fd
 
 gtgfiles=`ls gtg*f90 map_routines.f90`
 for gtgfile in $gtgfiles ; do
-    cp ../ncep_post_gtg.fd/$gtgfile .
+    cp $homedir/sorc/ncep_post_gtg.fd/$gtgfile .
 done
 
 #make -f makefile_module clean
 mv include/post_4/* .
 make -f makefile_module
 
-if [ ! -d "../../exec" ] ; then
-  mkdir -p ../../exec
+if [ ! -d "$homedir/exec" ] ; then
+  mkdir -p $homedir/exec
 fi
-cp ncep_post ../../exec/
+cp ncep_post $homedir/exec/.
 
 for gtgfile in $gtgfiles ; do
-    cp ../ncep_post_gtg.fd/${gtgfile}.stub $gtgfile
+    cp $homedir/sorc/ncep_post_gtg.fd/${gtgfile}.stub $gtgfile
 done
