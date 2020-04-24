@@ -4,7 +4,7 @@
 #SBATCH -e /scratch2/NCEPDEV/stmp3/Yali.Mao/run_gfs_post.oe%j
 #SBATCH -J gfs_post
 #SBATCH -t 00:30:00
-#SBATCH -N 7 --ntasks-per-node=12
+#SBATCH -N 8 --ntasks-per-node=12
 #SBATCH -q batch
 #SBATCH -A ovp
 ##SBATCH -V
@@ -28,23 +28,20 @@ export APRUN_DWN="staskfarm"
 module purge
 . $MODULESHOME/init/sh
 module load intel/18.0.5.274
-#module load impi/2019.0.4
-module load impi/2018.0.4
+module load impi/2019.0.4
 module use /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
 module load grib_util/1.1.1
 module load prod_util/1.1.0
 module load crtm/2.3.0
 module load slurm/default
-module load g2tmpl/1.6.0
+module load g2tmpl/1.5.1
 module load netcdf/4.7.0
 module load wrfio/1.1.1
 module list
 
 
 # specify PDY (the cycle start yyyymmdd) and cycle
-export CDATE=2020013112
-export CDATE=2018011000
-export CDATE=2019102500
+export CDATE=2019052000
 export PDY=`echo $CDATE | cut -c1-8`
 export cyc=`echo $CDATE | cut -c9-10`
 export cycle=t${cyc}z
@@ -89,9 +86,7 @@ export HOMEgfs=/scratch2/NCEPDEV/ovp/Yali.Mao/git/EMC_post_fork
 # Define COM directories
 ##############################################
 #export COMIN=/scratch2/NCEPDEV/stmp3/$LOGNAME/nemsio127/${RUN}.${PDY}/${cyc}
-export COMIN=/scratch2/NCEPDEV/stmp3/$LOGNAME/nemsio/${RUN}.${PDY}/${cyc}
-#export COMIN=/scratch2/NCEPDEV/stmp3/Yali.Mao/netcdf/${RUN}.${PDY}/${cyc}
-#export COMIN=/scratch1/NCEPDEV/stmp2/Fanglin.Yang/fv3test/gfs.20180110_nc_lossless/00
+export COMIN=/scratch2/NCEPDEV/stmp3/Yali.Mao/navy/${RUN}.${PDY}
 mkdir -p $COMIN
 # specify my own COMOUT dir to mimic operations
 export COMOUT=/scratch2/NCEPDEV/stmp3/$LOGNAME/com_post/${RUN}.$PDY/${cyc}
@@ -131,7 +126,7 @@ export KEEPDATA=YES
 #fi
 
 #############################################################
-export allfhr="anl"
+export allfhr="006 012 018"
 
 for post_times in $allfhr; do
 
@@ -142,11 +137,7 @@ for post_times in $allfhr; do
     # Theia doesn't have log.nemsio file, then prepare!
     COMROOT=/scratch2/NCEPDEV/rstprod/com
     COMROOT=$COMIN
-#    COMROOT=""
-    if [[ -z $COMROOT ]] ; then
-	export OUTPUT_FILE=netcdf
-       $HOMEgfs/jobs/J_NCEPPOST
-    elif [[  $COMROOT = $COMIN ]] ; then
+    if [[  $COMROOT = $COMIN ]] ; then
        echo > $COMIN/gfs.t${cyc}z.logf${post_times}.nemsio
        $HOMEgfs/jobs/J_NCEPPOST
     else
@@ -157,7 +148,7 @@ for post_times in $allfhr; do
 	   echo > $COMIN/gfs.t${cyc}z.logf${post_times}.nemsio
 	   $HOMEgfs/jobs/J_NCEPPOST
        else
-	   echo "ERROR!!! Input files are not ready"
+	   echo "ERROR!!! Input nemsio file are not ready"
        fi
     fi
 

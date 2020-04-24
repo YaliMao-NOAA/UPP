@@ -42,9 +42,8 @@ module list
 
 
 # specify PDY (the cycle start yyyymmdd) and cycle
-export CDATE=2020013112
-export CDATE=2018011000
-export CDATE=2019102500
+export CDATE=2019123012
+#export CDATE=2018011000
 export PDY=`echo $CDATE | cut -c1-8`
 export cyc=`echo $CDATE | cut -c9-10`
 export cycle=t${cyc}z
@@ -88,13 +87,10 @@ export HOMEgfs=/scratch2/NCEPDEV/ovp/Yali.Mao/git/EMC_post_fork
 ##############################################
 # Define COM directories
 ##############################################
-#export COMIN=/scratch2/NCEPDEV/stmp3/$LOGNAME/nemsio127/${RUN}.${PDY}/${cyc}
-export COMIN=/scratch2/NCEPDEV/stmp3/$LOGNAME/nemsio/${RUN}.${PDY}/${cyc}
-#export COMIN=/scratch2/NCEPDEV/stmp3/Yali.Mao/netcdf/${RUN}.${PDY}/${cyc}
-#export COMIN=/scratch1/NCEPDEV/stmp2/Fanglin.Yang/fv3test/gfs.20180110_nc_lossless/00
+export COMIN=/scratch1/NCEPDEV/global/Yali.Mao/candata/${RUN}.${PDY}/${cyc}
 mkdir -p $COMIN
 # specify my own COMOUT dir to mimic operations
-export COMOUT=/scratch2/NCEPDEV/stmp3/$LOGNAME/com_post/${RUN}.$PDY/${cyc}
+export COMOUT=/scratch1/NCEPDEV/global/Yali.Mao/candata/cancom/${RUN}.$PDY/${cyc}
 mkdir -p $COMOUT
 
 # specify variables if testing post in non gfs structure environment
@@ -131,7 +127,7 @@ export KEEPDATA=YES
 #fi
 
 #############################################################
-export allfhr="anl"
+export allfhr="000 003 006 009 012 015 018 021 024 027 030 033 036 039"
 
 for post_times in $allfhr; do
 
