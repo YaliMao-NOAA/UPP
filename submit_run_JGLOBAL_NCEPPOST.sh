@@ -1,1 +1,0 @@
-../EMC_post_wafs/submit_run_JGLOBAL_NCEPPOST.sh
