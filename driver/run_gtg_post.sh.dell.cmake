@@ -58,7 +58,7 @@ export envir=prod
 
 #export PDY=20171225
 #export cyc=18
-export PDY=20200204
+export PDY=20210610
 export cyc=00
 export cycle=t${cyc}z
 
@@ -66,7 +66,7 @@ export cycle=t${cyc}z
 # Define DATA COMOUT and COMIN
 ############################################
 export COMIN=$COMROOT/${NET}/${envir}/${RUN}.${PDY}/${cyc}/atmos
-export COMIN=/gpfs/dell3/ptmp/Yali.Mao/gfsnetcdf/${RUN}.${PDY}/${cyc}
+#export COMIN=/gpfs/dell3/ptmp/Yali.Mao/gfsnetcdf/${RUN}.${PDY}/${cyc}
 
 # specify your output and working directory
 export user=`whoami`

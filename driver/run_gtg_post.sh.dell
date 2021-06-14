@@ -7,12 +7,12 @@
 #BSUB -W 00:30
 #BSUB -q debug
 #BSUB -P GFS-DEV
-#BSUB -n 60
+#BSUB -n 84
 #BSUB -R span[ptile=12]
 #BSUB -R affinity[core(2):distribute=balance]
 
-export NODES=8
-export ntasks=72
+export NODES=7
+export ntasks=84
 export ptile=12
 export threads=1
 # this script mimics operational GFS post processing production
@@ -30,13 +30,15 @@ module purge
 module load ips/18.0.1.163
 module load impi/18.0.1
 module load lsf/10.1
+module load EnvVars/1.0.3
 module load prod_util/1.1.0
 module load grib_util/1.1.0
-module load prod_envir/1.1.0
+module load prod_envir/1.1.6
 module load g2tmpl/1.6.0
 module load crtm/2.3.0
-module load CFP/2.0.1
+module load CFP/2.0.2
 module load NetCDF-parallel/4.7.4
+module load HDF5-parallel/1.10.6
 
 module list
 
@@ -49,15 +51,15 @@ export RUN=gfs
 export NET=gfs
 export envir=prod
 
-
-export PDY=20200204
-export cyc=00
+export PDY=20210608
+export cyc=06
 export cycle=t${cyc}z
 
 ############################################
 # Define DATA COMOUT and COMIN
 ############################################
-export COMIN=/gpfs/dell3/ptmp/Yali.Mao/gfsnetcdf/${RUN}.${PDY}/${cyc}
+export COMIN=/gpfs/dell2/emc/modeling/noscrub/Yali.Mao/git/save/seam/gfs.${PDY}/${cyc}
+export COMIN=/gpfs/dell1/nco/ops/com/gfs/prod/gfs.${PDY}/${cyc}/atmos
 
 # specify your output and working directory
 export user=`whoami`
@@ -90,13 +92,13 @@ export POSTGPEXEC=$HOMEgfs/exec/ncep_post
 #
 #export PostFlatFile=$HOMEgfs/parm/postxconfig-NT-GFS.txt
 #export POSTGRB2TBL=$HOMEgfs/parm/params_grib2_tbl_new
+
 export POSTGRB2TBL=${HOMEgfs}/parm/params_grib2_tbl_new
 
 export OUTPUT_FILE=netcdf
 
 # For FIXCRTM satellite in scripts/exgfs_nceppost.sh.ecf
 #export hwrf_ver=v11.0.5
-#export g2tmpl_ver=v1.5.0
 
 export PGBF=NO
 export PGB1F=NO
@@ -108,7 +110,7 @@ export KEEPDATA=YES
 ####################################
 # Specify Forecast Hour Range
 ####################################
-allfhr=006
+allfhr=048
 
 #############################################################
 
