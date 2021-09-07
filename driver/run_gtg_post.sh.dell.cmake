@@ -58,7 +58,7 @@ export envir=prod
 
 #export PDY=20171225
 #export cyc=18
-export PDY=20210610
+export PDY=20210816
 export cyc=00
 export cycle=t${cyc}z
 
@@ -92,7 +92,7 @@ export VERBOSE=YES
 ##############################################
 # Define source code directories
 ##############################################
-export HOMEgfs=/gpfs/dell2/emc/modeling/noscrub/Yali.Mao/git/EMC_post_wafs
+export HOMEgfs=/gpfs/dell2/emc/modeling/noscrub/Yali.Mao/git/UPP.wafs
 
 export PARMpost=${HOMEgfs}/parm
 export POSTGPEXEC=$HOMEgfs/exec/upp.x
