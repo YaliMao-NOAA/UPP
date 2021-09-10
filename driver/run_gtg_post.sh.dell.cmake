@@ -58,7 +58,7 @@ export envir=prod
 
 #export PDY=20171225
 #export cyc=18
-export PDY=20210816
+export PDY=20210909
 export cyc=00
 export cycle=t${cyc}z
 

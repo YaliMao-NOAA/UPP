@@ -2,9 +2,9 @@ set -x
 cwd=`pwd`
 cp ncep_post_gtg.fd/*90 ncep_post.fd/.
 
-cd $HOMEgit/EMC_post.wafs
+cd $HOMEgit/UPP.wafs
 git submodule update --init CMakeModules
-cd $HOMEgit/EMC_post.wafs/tests
+cd $HOMEgit/UPP.wafs/tests
 ./compile_upp.sh
 
 
