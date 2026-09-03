@@ -8,14 +8,15 @@ local_tab_yes1
 fcst
 oper
 fcst
-fcst
+ens_fcst
 hour
 nws_ncep
-gfs_avn
+gefs
 complex_packing_spatial_diff
 2nd_ord_sptdiff
 fltng_pnt
 lossless
+pos_pert_fcst
 464
 EDPARM_ON_ISOBARIC_SFC
 ?
